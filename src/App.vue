@@ -1,47 +1,84 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div class="page">
+    <div class="container">
+      <header class="header-blocks">
+        <!-- User things selected -->
+        <div class="block">
+          <p class="block__info">Selected: 4/10</p>
+        </div>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+        <!-- Things available selected -->
+        <div class="block"></div>
+      </header>
+
+      <main class="main-blocks">
+        <!-- User things -->
+        <div class="block">
+          <div class="block item">Item</div>
+          <div class="block block--active item">Item</div>
+          <div class="block item">Item</div>
+          <div class="block item">Item</div>
+        </div>
+
+        <!-- Available things -->
+        <div class="block"></div>
+      </main>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<style scoped lang="scss">
+$active-color: #8e62b8;
+
+.page {
+  display: grid;
+  justify-items: center;
+  height: 100%;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.container {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-rows: auto 1fr;
+  max-width: 1024px;
+  width: 100%;
+  padding: 15px;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+.header-blocks {
+  display: grid;
+  grid-gap: 20px;
+  grid-auto-flow: column;
+  justify-content: space-between;
+}
+
+.block {
+  display: grid;
+  grid-gap: 15px;
+  grid-auto-flow: column;
+  align-items: start;
+  border: 4px solid #222;
+  padding: 10px;
+  text-align: center;
+
+  &__info {
+    font-size: 18px;
+    justify-self: end;
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
+  &--active {
+    border-color: $active-color;
+    color: $active-color;
   }
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.main-blocks {
+  display: grid;
+  grid-gap: 20px;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
 }
 </style>
