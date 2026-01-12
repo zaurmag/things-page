@@ -3,7 +3,7 @@
     <div class="container">
       <header class="header-blocks">
         <!-- User things selected -->
-        <ThingGrid
+        <ThingBlock
           class="user-things-selected"
           :info="`Selected: ${selectedUserThings.length} / ${MAX_SELECTED_COUNT}`"
         >
@@ -12,20 +12,21 @@
             :key="`selected-user-${thing.id}`"
             :name="thing.name"
           />
-        </ThingGrid>
+        </ThingBlock>
 
         <!-- Things available selected -->
-        <ThingGrid
+        <ThingBlock
           class="available-things-selected"
+          no-grid
           :info="!selectedAvailableThing ? 'Nothing is selected' : ''"
         >
           <ThingItem v-if="selectedAvailableThing" :name="selectedAvailableThing.name" />
-        </ThingGrid>
+        </ThingBlock>
       </header>
 
       <main class="main-blocks">
         <!-- User things -->
-        <ThingGrid>
+        <ThingBlock>
           <ThingItem
             v-for="thing in userThings"
             :key="`user-${thing.id}`"
@@ -33,10 +34,10 @@
             :is-active="isUserThingActive(thing.id)"
             @click="toggleUserThing(thing)"
           />
-        </ThingGrid>
+        </ThingBlock>
 
         <!-- Available things -->
-        <ThingGrid>
+        <ThingBlock>
           <ThingItem
             v-for="thing in availableThings"
             :key="`available-${thing.id}`"
@@ -44,7 +45,7 @@
             :is-active="selectedAvailableThing?.id === thing.id"
             @click="toggleAvailableThing(thing)"
           />
-        </ThingGrid>
+        </ThingBlock>
       </main>
     </div>
   </div>
@@ -52,7 +53,7 @@
 
 <script setup lang="ts">
 import ThingItem from './components/ThingItem.vue'
-import ThingGrid from './components/ThingGrid.vue'
+import ThingBlock from './components/ThingBlock.vue'
 import { useThings } from '@/use/useThings'
 
 const {
